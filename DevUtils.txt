@@ -1,0 +1,73 @@
+
+Development utilities
+---------------------
+
+These functions generally start with WSU∆
+
+WSU∆DisplayFns f
+
+Display functions to the screen.  f is a comma seperated list of
+function names to display.
+
+---
+
+z←WSU∆FindCalls f
+
+Find all the functions a given function calls.  f is the string name
+of a function.  A list of functions the function named in f calls is
+returned as a character matrix.
+
+---
+
+WSU∆PrintFunction f
+
+This prints a function definition to the printer.  f is the string
+name of the function to print.
+
+---
+
+WSU∆PrintWS flg
+
+This function prints an entire workspace to the default printer.  flg values
+are as follows:
+
+0 = print all functions
+1 = print all functions except those that start with ∆
+2 = print all functions except those that start with a capitol letter
+3 = print all functions except those that start with ∆ or a capitol letter
+
+Basically, you'd use 0 to print everything and 3 to excluse the utilities.
+
+---
+
+f WSU∆ReplaceFun s
+
+This function performs a search and replace operation on a single APL
+function.  f is the string name of the function to be operated on.  s
+is the search and replace string that uses a helper function named
+∆RD.  For example:
+
+'myFun'  WSU∆ReplaceFun 'fromStr' ∆RD 'toStr'
+
+---
+
+f WSU∆ReplaceWS t
+
+Replace string f with string t in all functions in the workspace.
+
+---
+
+s WSU∆SearchFuns fl
+
+Search a specified list of functions for a specified string.  s is the
+string to search for.  fl is a comma seperated list of function names
+to search.
+
+---
+
+WSU∆SearchWS s
+
+
+Search all functions in the workspace for the string s.
+
+

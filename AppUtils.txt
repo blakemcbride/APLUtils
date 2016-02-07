@@ -1,0 +1,74 @@
+
+Application runtime utilities
+-----------------------------
+
+As stated in Utils.txt:
+
+
+Typically an application would start with a function named 'start',
+and ⎕LX←'Auto'.  When an application is loaded, Auto gets run in order
+to initialize certain things, and then the application specific entry
+point 'start' is called.  Following this procedure is necessary in
+order for the Application runtime utilities to function.  This is
+because they assume certain initialization had taken place before they
+are called.
+
+Calling Auto without a start function causes the application to stop
+with a SI.  At this point the Application runtime functions may be
+used since Auto already initialized everything.  The Generic utilities
+and Development utilities do not have this requirement and may be used
+at any point.
+
+
+User I/O utilities (a subset of Application runtime utilities)
+------------------
+
+z←EHN v 
+
+End, Help, or Nothing.  This function takes a string vector and returns
+a three element numeric vector based on the string contents as follows:
+
+
+1 0 0 = the string has 'end'
+0 1 0 = the string has 'help'
+0 0 1 = the string is empty
+0 0 0 = the string has something else
+
+This function is used in conjunction with the other input functions 
+(Pic, Pis, Pin, etc.) in order to cause the system to branch to a 
+specific location in response to pre-defined user inputs.  For example:
+
+end     the signifies to exit a question and cause the program to go back to the
+        previous question
+
+help    this causes the system to branch to a help display message (and would normally
+        return to the question)
+	
+(nothing)  this generally signifies to move forward without providing a response
+
+This function is used a lot.  Typical usage:
+
+EN4:...
+...
+EN5:→(EHN name←1 20 Pis 'Enter your name')/EN4, HP5, EN6
+EN6:...
+...
+→0
+HP5:'My help text'
+→EN5
+
+
+---
+
+z←s Pic p                                                                              
+ ⍝ Input single character
+ ⍝ s = character vector of acceptible characters
+ ⍝ p = prompt
+ ⍝ z = binary vector = end, help, nothing, s[1], s[2], etc.
+ 
+ Example usage:
+ 
+ EN4:...
+ ...
+ EN5:→('yn' Pic 'Do you wish to continue')/EN4,HP5,EN4,EN6,EN4
+ EN6:...
