@@ -1,8 +1,7 @@
 #!/usr/local/bin/apl --script
  ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
 ⍝
-⍝ Utils 2016-02-07 05:15:39 (GMT-6)
-⍝
+⍝ Utils 2018-01-06  18:40:30 (GMT-6)
  ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
 
 ∇z←d AddDays n 
@@ -510,13 +509,14 @@
  ⍎(('L'≠1↑Pd)∧0=10|∆PN)/'O''Completed page '',⍕∆PN'
 ∇
 
-∇c←v Pis q                                                                     
- ⍝ input character string
- ⍝ v[1] = minimum number of characters
- ⍝ v[2] = maximum number of characters
- EN1:⍎'→(EHN c←',((¯1≠1↑v)/'CS '),'PI q,''?'')/0'
- →(~((⍴c)<1↑v)∨(⍴c)>1↓v)/0
- →EN1 ∆ ER 'Error: Please re-enter from ',(⍕0⌈1↑v),' to ',(⍕1↓v),' characters.'
+∇z←s Pic p;t                                                                               
+ ⍝ Input single character
+ ⍝ s = character vector of acceptible characters
+ ⍝ p = prompt
+ ⍝ z = binary vector = end, help, nothing, s[1], s[2], etc.
+ EN1:→(z←(EHN t←(¯1+(t≠' ')⍳1)↓t←PI p,' [',s,']?'),(⍴s)⍴0)/0
+ →(z[3+⍳⍴,s]←s=1↑t)/0
+ →EN1 ∆ ER 'Invalid entry; valid responses are: ',(,((¯1↓s),[1.5]','),' '),'or ',(¯1↑s),'.'
 ∇
 
 ∇n←v Picd q;d;td                                                                                   
@@ -603,14 +603,13 @@
  ER1:→EN1 ∆ ER(⍕n), ' already exists; Please reenter.'
 ∇
 
-∇z←s Pic p;t                                                                               
- ⍝ Input single character
- ⍝ s = character vector of acceptible characters
- ⍝ p = prompt
- ⍝ z = binary vector = end, help, nothing, s[1], s[2], etc.
- EN1:→(z←(EHN t←(¯1+(t≠' ')⍳1)↓t←PI p,' [',s,']?'),(⍴s)⍴0)/0
- →(z[3+⍳⍴,s]←s=1↑t)/0
- →EN1 ∆ ER 'Invalid entry; valid responses are: ',(,((¯1↓s),[1.5]','),' '),'or ',(¯1↑s),'.'
+∇c←v Pis q                                                                     
+ ⍝ input character string
+ ⍝ v[1] = minimum number of characters
+ ⍝ v[2] = maximum number of characters
+ EN1:⍎'→(EHN c←',((¯1≠1↑v)/'CS '),'PI q,''?'')/0'
+ →(~((⍴c)<1↑v)∨(⍴c)>1↓v)/0
+ →EN1 ∆ ER 'Error: Please re-enter from ',(⍕0⌈1↑v),' to ',(⍕1↓v),' characters.'
 ∇
 
 ∇n←v Piv q;t;m;s;b;e;a                                                                            
@@ -1466,14 +1465,14 @@
 
 ⎕L←0
 
-⎕LX←' ' ⍝ prototype...
-  ⎕LX←0⍴⎕LX
+⎕LX←' ' ⍝ proto 1
+  ⎕LX←0⍴⎕LX ⍝ proto 2
 
 ⎕PP←10
 
 ⎕PR←' '
 
-⎕PS←0
+⎕PS←0 0
 
 ⎕PW←80
 
@@ -1481,7 +1480,7 @@
 
 ⎕RL←1
 
-⎕TZ←-6
+⎕TZ←¯6
 
 ⎕X←0
 
