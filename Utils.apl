@@ -10,7 +10,7 @@
 
 ∇Ail ln;s;q                       
  →(1=ln←⌈ln)/LP1
- ○(6↑'[',(⍕ln-1),']'),Mat[ln-1;]
+ O(6↑'[',(⍕ln-1),']'),Mat[ln-1;]
  LP1:→(0=⍴q←Eoi 6↑'[',(⍕ln),']')/0
  →((1↓⍴Mat)=s←(⍴q)⌈1↓⍴Mat)/EN1
  Mat←((1↑⍴Mat),s)↑Mat
