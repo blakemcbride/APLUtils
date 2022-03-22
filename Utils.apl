@@ -1,14 +1,15 @@
 #!/usr/local/bin/apl --script
- ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
-⍝
-⍝ Utils 2018-01-06  18:40:30 (GMT-6)
- ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
+ ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
+⍝                                                                    ⍝
+⍝ Utils.apl                            2022-03-22  06:23:09 (GMT-6)  ⍝
+⍝                                                                    ⍝
+ ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
 
-∇z←d AddDays n 
+∇z←d AddDays n
  z←CAL n+JUL d
 ∇
 
-∇Ail ln;s;q                       
+∇Ail ln;s;q
  →(1=ln←⌈ln)/LP1
  O(6↑'[',(⍕ln-1),']'),Mat[ln-1;]
  LP1:→(0=⍴q←Eoi 6↑'[',(⍕ln),']')/0
@@ -20,7 +21,7 @@
  →LP1
 ∇
 
-∇z←Aln t;i;n                                                            
+∇z←Aln t;i;n
  z←((⍴n)⍴(,(-+/∧\⌽i)⌽i)\(,i←n≠' ')/,n←'[',(⍕(n,1)⍴¯1+⍳n←1↑⍴t),']'),' ',t
  ⍝ t = ⎕CR of a function
  ⍝ z = t with line numbers in brackets added
@@ -41,28 +42,28 @@
  Lib←0⍴⎕EX'FILE_IO',0⍴⎕EX'SQL'
 ∇
 
-∇z←Box x    
+∇z←Box x
  z←⊂(⍴x)(,x)
 ∇
 
-∇z←CAL d;y                                                                        
+∇z←CAL d;y
  z←⌊(d-⌊365.25×y←⌊((d←,d)-122.1)÷365.25)÷30.6001
  z←100 100 100⊥⍉(y+∨/z∘.=1 2),(z←z-1+12×∨/z∘.=14 15),[1.5]d-(⌊365.25×y)+⌊30.6001×z
 ∇
 
-∇z←CCJ a                        
+∇z←CCJ a
  z←(⌈0.5×(+/∧\z)-+/∧\⌽z←' '=a)⌽a
 ∇
 
-∇z←n CJ x                                                  
+∇z←n CJ x
  z←((0⌈⌊0.5×n-⍴x)⍴' '),x←(¯1+(x≠' ')⍳1)↓(-((⌽x≠' ')⍳1)-1)↓x
 ∇
 
-∇z←CS x                           
+∇z←CS x
  z←(¯1+(' '≠x)⍳1)↓(1-(' '≠⌽x)⍳1)↓x
 ∇
 
-∇z←CSV∆Parse v;y;d;q                                                                                                                                                 
+∇z←CSV∆Parse v;y;d;q
  d←','
  q←'"'
  ⍝ Break apart columns into separate arrays
@@ -71,7 +72,7 @@
  z←{((⍴⍵)⍴y,((0⌈¯2+⍴⍵)⍴1),y←~((¯1↑⍵)∊q)∧((1↑⍵)∊q)∧1<⍴⍵)/⍵←(-y)↓(⍲/(¯1+⍳⍴⍵)⌽(0 ¯1↓0,0 1↓(((⍴⍵)⍴q)∘.=⍵)),0)/⍵←⍵,(y←1=⍴,⍵)⍴' '}¨z←1↓1↓¨(1++\(z∊d)>≠\z∊q)⊂z←(1↑d),(1↑d),v
 ∇
 
-∇z←CSV∆dequote a;y;q                                                
+∇z←CSV∆dequote a;y;q
  q←'"'
  ⍝ remove embedded quotes from a string
  z←(-y)↓(⍲/(¯1+⍳⍴z)⌽(0 ¯1↓0,0 1↓(((⍴z)⍴q)∘.=z)),0)/z←a,(y←1=⍴,a)⍴' '
@@ -79,15 +80,15 @@
  z←((⍴z)⍴y,((0⌈¯2+⍴z)⍴1),y←~(q=¯1↑z)∧(q=1↑z)∧1<⍴z)/z
 ∇
 
-∇z←L Catc R                                               
+∇z←L Catc R
  z←((z,1↓⍴L)↑L),((z←(1↑⍴L←2 Rank L)⌈1↑⍴R),1↓⍴R)↑R←2 Rank R
 ∇
 
-∇z←L Catr R                                                 
+∇z←L Catr R
  z←(((1↑⍴L),z)↑L)⍪((1↑⍴R),z←(1↓⍴L←2 Rank L)⌈1↓⍴R)↑R←2 Rank R
 ∇
 
-∇Change;L;s;q                                                                     
+∇Change;L;s;q
  →(0=1↑⍴Mat)/ER1
  EN1:→(EHN L←(1 ¯1,⍳1↑⍴Mat)Piv'Enter the line numbers you wish to change')/0,EN1,0
  LP1:→(0=⍴L)/END
@@ -102,19 +103,19 @@
  ER1: ER'There are no lines to change.'
 ∇
 
-∇Clear              
+∇Clear
  ⍞←(⎕UCS 27),'[2J'
  ⍞←(⎕UCS 27),'[1;1H'
 ∇
 
-∇z←b Convt n                    
+∇z←b Convt n
  z←⍉((1+⌊(⍟(0=z)+z←⌈/n)÷⍟b)⍴b)⊤n
  ⍝ b = base
  ⍝ n = vector of decimal numbers
  ⍝ z = number n in base b
 ∇
 
-∇z←m Ctit t                                                           
+∇z←m Ctit t
  ⍝ Create column title
  ⍝ Left argument is the format mask.  Each element seperated by comma
  ⍝ Right argument is one line of the column titles seperated by commas
@@ -130,7 +131,7 @@
  →LP1
 ∇
 
-∇ts←DATETIME                                                  
+∇ts←DATETIME
  ts←⎕TS
  ts←(10000⊥(ts[1]),100⊥ts[2 3]),100⊥ts[4 5]
  ts←ts,1+ts[2]≥1200
@@ -139,16 +140,16 @@
  ts←(,Dtfmt ts[1]),'   ',(,Tmfmt ts[2]),(2 3⍴' AM PM')[ts[3];]
 ∇
 
-∇z←n DIV d       
+∇z←n DIV d
  z←(n×z)÷d+~z←d≠0
 ∇
 
-∇z←Date;t                                                                  
+∇z←Date;t
  t←(4 2⍴'thstndrd')[1+t×(~z[3]∊11 12 13)∧(t←10⊤(z←⎕TS)[3])∊⍳3;]
  z←(Dyofwk 10000 100 100⊥z[⍳3]),'  ',(Mmofyr z[2]),' ',(⍕z[3]),t,', ',⍕z[1]
 ∇
 
-∇Delete;L                                                                          
+∇Delete;L
  →(0=1↑⍴Mat)/ER1
  EN1:→(EHN L←(1,(1↑⍴Mat),1 0 100)Pin'Enter the line numbers to be deleted')/0,EN1,0
  Mat←(~(⍳1↑⍴Mat)∊L)⌿Mat
@@ -157,33 +158,33 @@
  ER1:ER 'There are no lines to delete.'
 ∇
 
-∇z←Dtfmt d                                                           
+∇z←Dtfmt d
  z←(2 0⍕⍉d[,2;]),'/',(2 0⍕⍉d[,3;]),'/',4 0⍕⍉(d←10000 100 100⊤,d)[,1;]
  z←z[;1],(0 ¯1+⍴z)⍴¯1 0↓(d=' ')⊖(d←,0 1↓z),[0.5]'0'
 ∇
 
-∇z←Dyofwk x                                                                                            
+∇z←Dyofwk x
  z←RS(','Parse'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday')[((⍳1<⍴,x)×⍴x)⍴x←1+7|5+JUL x;]
 ∇
 
-∇z←EHN v                               
+∇z←EHN v
  z←((2 8↑2 4⍴'end help')∧.=8↑v),0=⍴v←,v
 ∇
 
-∇z←ER p                                                           
+∇z←ER p
  ⎕←⎕AV[8],'***  ',p,'  ***'
  z←0 0⍴0
  →(0=⍴Cms)/0
  z←ER 'Error in command string; returning to manual input.',Cms←''
 ∇
 
-∇z←Ealn t;i;n                                                    
+∇z←Ealn t;i;n
  z←((⍴n)⍴(,(-+/∧\⌽i)⌽i)\(,i←n≠' ')/,n←'[',(⍕(n,1)⍴⍳n←1↑⍴t),']'),t
  ⍝ t = ⎕CR of a function
  ⍝ z = t with line numbers in brackets added
 ∇
 
-∇z←Edit x;p;t;r;s;n;b                                             
+∇z←Edit x;p;t;r;s;n;b
  z←x
  p←0
  LP1:⎕←z
@@ -217,7 +218,7 @@
  →LP1
 ∇
 
-∇z←Eoi p                      
+∇z←Eoi p
  EN0:z←((⍴Pad)+⍴p)↓⍞,0⍴⍞←p,Pad
  →(':'≠1↑z)/0
  z←1↓z
@@ -230,12 +231,12 @@
  z←⎕PW CJ 1↓z
 ∇
 
-∇z←m Err b   
+∇z←m Err b
  →(~z←∨/,b)/0
  b←ER m
 ∇
 
-∇z←L Estart Mat;qq;fn;bv                                                  
+∇z←L Estart Mat;qq;fn;bv
  Delim←,'∵'
  qq←   'add       =  to add; insert; or write over a line,'
  qq←qq,'change    =  to modify a line in the current text,'
@@ -264,7 +265,7 @@
  ER2:→EN1 ∆ ER'Error; text has exceeded a maximum of ',(⍕¯1↑L),' columns.'
 ∇
 
-∇z←a Expd v                                                      
+∇z←a Expd v
  z←(,v∘.≥⍳z)/(z×⍴v)⍴(z⍴1),(z←⌈/v)⍴0
  →(0>a)/0
  z←((⍴z)×⌈a÷+/z)⍴z
@@ -274,7 +275,7 @@
  ⍝ z = binary vector - expand argument
 ∇
 
-∇z←a Expnd v                                           
+∇z←a Expnd v
  z←(,v∘.≥⍳z)/,⍉((z←⌈/v),⍴v←1⌈|v)⍴0⌈×v
  →(0>a)/0
  z←((⍴z)×⌈a÷+/z)⍴z
@@ -287,27 +288,27 @@
  ⍝ z = binary vector - expand argument
 ∇
 
-∇z←f Fcj m                                         
+∇z←f Fcj m
  z←(⌈0.5×(+/∧\z)-+/∧\⌽z←' '=m)⌽m←(((2=⍴⍴m)⍴⍴m),f)↑m
 ∇
 
-∇z←f Fld m           
+∇z←f Fld m
  z←(((2=⍴⍴m)⍴⍴m),f)↑m
 ∇
 
-∇z←f Flj m                                
+∇z←f Flj m
  z←(¯1+⎕IO++/∧\m=' ')⌽m←(((2=⍴⍴m)⍴⍴m),f)↑m
 ∇
 
-∇z←Fn                            
+∇z←Fn
  z←⍕13 32 24 60 60⊥⎕TS[2 3 4 5 6]
 ∇
 
-∇z←f Frj m                                  
+∇z←f Frj m
  z←(-¯1+⎕IO++/∧\⌽m=' ')=m←(((2=⍴⍴m)⍴⍴m),f)↑m
 ∇
 
-∇r←Iota v                            
+∇r←Iota v
  ⍎(3=⍴v←,v)/'→0,r←v[1]+v[2]×¯1+⍳v[3]'
  r←⍳v
  ⍝ v[1] = first number
@@ -316,19 +317,19 @@
  ⍝ if 0=⍴v then ⍳v
 ∇
 
-∇z←JUL d                                                                         
+∇z←JUL d
  z←(⌊365.25×(d[1;])-z)+(⌊30.6001×d[2;]+1+12×z←∨/d[2;]∘.=1 2)+(d←0 100 100⊤,d)[3;]
 ∇
 
-∇r←LJ m                
+∇r←LJ m
  r←(¯1+⎕IO++/∧\m=' ')⌽m
 ∇
 
-∇z←LS x                                                   
+∇z←LS x
  ⍎'z←',((1=⍴⍴x)↑','),'(∨\'' ''∨.≠x)/x←((0,¯1↑⍴x)⍴'' '')⍪x'
 ∇
 
-∇r←v Lck n                                                                    
+∇r←v Lck n
  ⍝ n = string vector - to be tested
  ⍝ v[1] = minimum value
  ⍝ v[2] = max value
@@ -351,11 +352,11 @@
  EN3:ER 'Error: Please re-enter in increments of ',(⍕v[3]),'.'
 ∇
 
-∇t←Lcn n                      
+∇t←Lcn n
  t←⌊/((~(⍳t)∊n)/⍳t),1+t←⌈/1,,n
 ∇
 
-∇z←po Lhf f;b                                                                          
+∇z←po Lhf f;b
  ⍝ This function (along with Out and Rst) are used to print.
  z←1
  EN1:→(3↑b←'lpfs'Pic'Enter print destination: local, printer, file, or screen')/0,EN1,0
@@ -372,7 +373,7 @@
  z←0
 ∇
 
-∇List;L;m                                                                       
+∇List;L;m
  →(0=1↑⍴Mat)/ER1
  m←Ealn Mat
  EN1:→(EHN L←(1 ¯1,⍳1↑⍴Mat)Piv'Enter the line numbers you wish to list')/0,EN1,0
@@ -383,15 +384,15 @@
  ER1:ER 'There are no lines to list.'
 ∇
 
-∇z←w Lst m;t                                           
+∇z←w Lst m;t
  z←((⌈t[1]÷z),z×t[2])⍴((z×⌈t[1]÷z←⌊w÷t[2]),(t←⍴m)[2])↑m
 ∇
 
-∇z←Mmofyr i                                                                                                       
+∇z←Mmofyr i
  z←RS(','Parse'January,February,March,April,May,June,July,August,September,October,November,December')[1+12|⌊i-1;]
 ∇
 
-∇Move;m;fl;tl                                                                          
+∇Move;m;fl;tl
  →(0=1↑⍴m←Mat)/ER1
  EN1:→(EHN fl←(1,(1↑⍴m),1 0 10000)Pin'Enter the from line numbers')/0,HP1,0
  EN2:→(EHN tl←(0,(1↑⍴Mat),0.1 0 1)Pin'Enter the to line number')/EN1,HP2,EN1
@@ -408,7 +409,7 @@
  ER1:ER'There are no lines in the present text to move.'
 ∇
 
-∇z←a Mul c                                    
+∇z←a Mul c
  ⍝ Make underline - companion function to Ctit
  a←','Parse a
  z←''
@@ -419,13 +420,13 @@
  →LP1
 ∇
 
-∇New                                             
+∇New
  →(0=⍴Mat)/0
  EN1:→('yn'Pic'clear present text')/0,EN1,0,EN2,0
  EN2:Mat←0 0⍴' '
 ∇
 
-∇s←NumbStr n;d;name;count;ten;ten6;t                                                                   
+∇s←NumbStr n;d;name;count;ten;ten6;t
  name←' ',','Parse',thousand,million,billion,trillion'
  count←' ',','Parse'one,two,three,four,five,six,seven,eight,nine'
  ten←' ',','Parse',twenty,thirty,forty,fifty,sixty,seventy,eighty,ninety'
@@ -453,26 +454,26 @@
  END:s←LS s
 ∇
 
-∇O c             
+∇O c
  →(0=⎕NC'Pd')/EN1
  →('L'=1↑Pd)/0
  EN1:→(0≠⍴Cms)/0
  c
 ∇
 
-∇z←Omega v                                                                        
+∇z←Omega v
  z←v/⍳⍴,v
  ⍝ convers a vector of 1's and 0's into a vector of the index positions of the 1's
 ∇
 
-∇OpenPrinter options                             
+∇OpenPrinter options
  →(0≠⎕NC 'FILE_IO')/LOADED
  →('FILE_IO'≡'lib_file_io.so'⎕FX'FILE_IO')/LOADED
  ⎕ES 'Error loading FILE_IO library'
  LOADED:∆FH←'w'FILE_IO[24]'lpr ',options
 ∇
 
-∇Out x;t                                                                                
+∇Out x;t
  ⍝ This function (along with Lhs and Rst) are used to print.
  ⍝ This function takes a character scalar, vector, or matrix an prints it to the printer
  →('LSF'=1↑Pd)/EN1,EN1,EN1
@@ -484,22 +485,22 @@
  EN1:x
 ∇
 
-∇z←PI p;l;r                                    
+∇z←PI p;l;r
  ⍎(0=⍴Cms)/'Cms←((⍴Pad)+⍴,p)↓l,0⍴l←⍞,0⍴⍞←p,Pad'
  Cms←(1+⍴z←(¯1+Cms⍳Delim[1])↑Cms)↓Cms
 ∇
 
-∇r←d Parse v                                                        
+∇r←d Parse v
  ⍝ Convert vector v into a matrix breaking at delimiter d
  r←(((0≠⍴v)×⍴r),⌈/r)⍴(,r∘.≥⍳⌈/r←¯1+(r,1+⍴v)-0,r←r/⍳⍴v)\(~r←v∈d)/v←,v
 ∇
 
-∇r←d Parse2 v                                                      
+∇r←d Parse2 v
  ⍝ break up vector v accoriding to delimiter d into seperate arrays
- r←1↓1↓¨(1++\r∊d)⊂r←(1↑d),(1↑d),v
+ r←⊃1↓1↓¨(1++\r∊d)⊂r←(2/↑d),v
 ∇
 
-∇Pg;t                                              
+∇Pg;t
  →(∆LN=0)/0
  →(0=t←66|63-∆LN)/EN1
  Out(t,1)⍴' '
@@ -509,7 +510,7 @@
  ⍎(('L'≠1↑Pd)∧0=10|∆PN)/'O''Completed page '',⍕∆PN'
 ∇
 
-∇z←s Pic p;t                                                                               
+∇z←s Pic p;t
  ⍝ Input single character
  ⍝ s = character vector of acceptible characters
  ⍝ p = prompt
@@ -519,7 +520,7 @@
  →EN1 ∆ ER 'Invalid entry; valid responses are: ',(,((¯1↓s),[1.5]','),' '),'or ',(¯1↑s),'.'
 ∇
 
-∇n←v Picd q;d;td                                                                                   
+∇n←v Picd q;d;td
  ⍝ Date input - input format mm/dd/yyyy
  ⍝ v[1] = minimum date
  ⍝ v[2] = maximum date
@@ -543,7 +544,7 @@
  ER2:→EN1 ∆ ER 'Error: Date is out of range; re-enter from ',(,Dtfmt v[1]),' to ',(,Dtfmt v[2]),'.'
 ∇
 
-∇n←v Pid q;bv                                                    
+∇n←v Pid q;bv
  ⍝ Date input - input format YYYYMMDD
  ⍝ v[1] = minimum date (YYYYMMDD)
  ⍝ v[2] = maximum date (YYYYMMDD)
@@ -560,7 +561,7 @@
  ER1:→EN1 ∆ ER(⍕n),' is not a valid date; please re-enter.'
 ∇
 
-∇z←m Pim p;t                                                         
+∇z←m Pim p;t
  ⍝ Select a string from a matrix of options
  ⍝ m = character matrix of choices
  ⍝ p = prompt
@@ -572,7 +573,7 @@
  END:z←z[1 3],(1↑⍴m)⍴0
 ∇
 
-∇n←v Pin q;m;t                                                 
+∇n←v Pin q;m;t
  ⍝ Input one or more numbers
  ⍝ v[1] = minimum value (inclusive)
  ⍝ v[2] = maximum value (inclusive)
@@ -603,7 +604,7 @@
  ER1:→EN1 ∆ ER(⍕n), ' already exists; Please reenter.'
 ∇
 
-∇c←v Pis q                                                                     
+∇c←v Pis q
  ⍝ input character string
  ⍝ v[1] = minimum number of characters
  ⍝ v[2] = maximum number of characters
@@ -612,7 +613,7 @@
  →EN1 ∆ ER 'Error: Please re-enter from ',(⍕0⌈1↑v),' to ',(⍕1↓v),' characters.'
 ∇
 
-∇n←v Piv q;t;m;s;b;e;a                                                                            
+∇n←v Piv q;t;m;s;b;e;a
  ⍝ Input a list of numbers from a list of possibles
  ⍝ v[1] = minimum number of numbers to enter
  ⍝ v[2] = maximum number of numbers to enter
@@ -670,11 +671,11 @@
  ER3:→EN1 ∆ ER 'You have not entered the minimum number of numbers; re-enter ',(⍕v[1]),' numbers.'
 ∇
 
-∇Pkg∆Erase pkg;t                                     
+∇Pkg∆Erase pkg;t
  t←⎕EX ((((1↑⍴t),(1+⍴,pkg))↑t)∧.=pkg,'∆')⌿t←⎕NL 2 3 4
 ∇
 
-∇r←Pkg∆List;t                                               
+∇r←Pkg∆List;t
  ⍝ find names that have delta in them except in first column
  r←,∧\'∆'≠t←(∨/'∆'=0 1↓t)⌿t←⎕NL 2 3 4
  r←(⍴t)⍴(,' ',((×/⍴t),1)⍴t)[r+1+2×¯1+⍳⍴r]
@@ -686,15 +687,15 @@
  r←(¯1↓1,∨/r≠1⊖r)⌿r
 ∇
 
-∇z←Pkg∆Present pkg;t                           
+∇z←Pkg∆Present pkg;t
  z←∨/(((1↑⍴t),(1+⍴,pkg))↑t←⎕NL 2 3 4)∧.=pkg,'∆'
 ∇
 
-∇pkg Pkg∆Require ws             
+∇pkg Pkg∆Require ws
  ⍎(~Pkg∆Present pkg)/')COPY ',ws
 ∇
 
-∇n Pnt x;i;s;t                                                                      
+∇n Pnt x;i;s;t
  →(0=⍴x←((x/¯1↓i),¯1↑i←1 1,⍴x)⍴x)/0
  ⍎(n[3]=¯1)/'n←n[1 2],1↑⍴x'
  n←n[1 2],((¯2+⍴n)×⌈(1↑⍴x)÷+/2↓n)⍴2↓n
@@ -726,31 +727,31 @@
  ⍝ x   = data to be printed
 ∇
 
-∇r←RJ m                  
+∇r←RJ m
  r←(-¯1+⎕IO++/∧\⌽m=' ')⌽m
 ∇
 
-∇z←p RND n                 
+∇z←p RND n
  z←(×n)×(⌊0.5+|n×10*p)÷10*p
 ∇
 
-∇z←RS x                                                     
+∇z←RS x
  ⍎'z←',((1=⍴⍴x)↑','),'(⌽∨\⌽'' ''∨.≠x)/x←((0,¯1↑⍴x)⍴'' '')⍪x'
 ∇
 
-∇r←n Rank a                          
+∇r←n Rank a
  ⍝ Changes the rank of a to n
  r←(n↑(×/(1-n)↓r),(1-n)↑r←(n⍴1),⍴a)⍴a
 ∇
 
-∇z←n Rep v                                            
+∇z←n Rep v
  z←,⍉(n,⍴v)⍴v
  ⍝ v = scalar or vector of the elements to be repeated
  ⍝ n = the number of times to repeat each element of v
  ⍝ z = each element of v repeated n times
 ∇
 
-∇Replace;L;f;t;m;s                                                                        
+∇Replace;L;f;t;m;s
  →(0=⍴Mat)/ER1
  EN1:→(EHN L←(1 ¯1,⍳1↑⍴Mat)Piv'Enter the line numbers you wish to search/replace')/0,EN1,0
  EN2:→(EHN f←PI 'Enter the character string to be searched:')/EN1,EN2,EN1
@@ -764,13 +765,13 @@
  ER1: ER'There is no text to replace.'
 ∇
 
-∇r←Rev m                                                   
+∇r←Rev m
  r←⌽⍒(,m∘.≥⍳⌈/m)/,+⍀((⍴m),⌈/m←,m)⍴1
  ⍝ m = numeric vector indicating the field widths
  ⍝ r = indecees needed to reverse each  field within itself
 ∇
 
-∇r←Roman n;i;⎕IO                              
+∇r←Roman n;i;⎕IO
  ⎕IO←0
  i←0 1000⊤''⍴n
  r←0 5⊤(4⍴10)⊤n←i[1]
@@ -778,18 +779,18 @@
  r←(i[0]⍴'M'),n/,⍉4 16⍴'xMxxDCMDLXCLVIXV'
 ∇
 
-∇z←Romanu a                                                
+∇z←Romanu a
  z←+/(¯1+2×z≥1↓z,0)×z←(1 5 10 50 100 500 1000)['IVXLCDM'⍳a]
 ∇
 
-∇z←Rot m;q                                                           
+∇z←Rot m;q
  q←'abcdefghijklmnopqrstuvwxyz∆ABCDEFGHIJKLMNOPQRSTUVWXYZ⍙0123456789'
  z←((m[;1]≠'⍝')+(m[;1]∊¯10↓q)∧0=(+/∧\':'≠m,' ')-+/∧\m∊q)⌽' ',' ',m
  ⍝ m = ⎕CR of a function
  ⍝ z = m rotated according to labels and comments
 ∇
 
-∇vw Rpt x;s;t;v;p                                                                            
+∇vw Rpt x;s;t;v;p
  x←((×/¯1↓t),¯1↑t←1 1,⍴x)⍴x
  →(23=⍴∆CV)/EN0
  ∆CV←(11↑∆CV),2=⎕NC'∆',4 1⍴'PCGB'
@@ -860,13 +861,13 @@
  ⍝ x   = character (any shape or rank) - data to be printed
 ∇
 
-∇n←RptBt;z          
+∇n←RptBt;z
  z←⎕PW↑⎕PW CJ'Page'
  ∆B←z⍪(2,⎕PW)⍴' '
  n←1,5+⌈⎕Pw÷2
 ∇
 
-∇z←L RptPt R                             
+∇z←L RptPt R
  z←(2,⎕PW)⍴' '
  z←z⍪(-⎕PW)↑'Run date:  ',Date,'  ',Time
  z←z⍪' '
@@ -876,7 +877,7 @@
  z←z⍪' '
 ∇
 
-∇Rptc x                                                
+∇Rptc x
  →(2≠⎕NC'∆CV')/0
  →(x=1 2)/EN1,EN2
  (-∆CV[2])Rpt''
@@ -891,7 +892,7 @@
  EN2:¯1 Rpt '  '
 ∇
 
-∇z←Rpts v;t                                                                   
+∇z←Rpts v;t
  →(8=⍴∆DV)/EN1
  ⍎∆CV[13]/'∆T←((¯1+t⍳1),0)↓((-¯1+(⌽t←∨/∆C≠'' '')⍳1),0)↓∆C'
  EN1:→((t∧~0∊⍴x),t←∧/v<z←0)/0,EN2
@@ -911,7 +912,7 @@
  →LP1
 ∇
 
-∇Rst;t                                        
+∇Rst;t
  ⍝ close printer
  →('PFLS'=1↑Pd)/EN1,EN3,EN3,EN3
  EN1:t←FILE_IO[25]∆FH
@@ -919,7 +920,7 @@
  EN3:t←⎕EX' 'Parse'Pt Pd ∆dv ∆t ∆d ∆f ∆re ∆FH'
 ∇
 
-∇Screen                             
+∇Screen
  →(0=1↑⍴Mat)/ER1
  (0 0⍴' ')∆LP Ealn Mat
  →0
@@ -929,7 +930,7 @@
 ∇Sink r
 ∇
 
-∇z←Sort m;i;b          
+∇z←Sort m;i;b
  →((2=⍴⍴m)∧0=1↑0⍴m)/EN1
  z←⍋m
  →0
@@ -941,7 +942,7 @@
  →LP1
 ∇
 
-∇z←Sort1 m;i;b         
+∇z←Sort1 m;i;b
  ⍎(' '=1↑0⍴m)/'m←⎕AV⍳m'
  →(2≠⍴⍴m)/EN1
  z←⍳1↑⍴m
@@ -953,7 +954,7 @@
  EN1:z←⍋m
 ∇
 
-∇x←Sort2 m;v1;v2;n;c                             
+∇x←Sort2 m;v1;v2;n;c
  ⍎(0≠1↑0⍴m)/'m←⎕AV⍳m'
  →(2≠⍴⍴m)/EN2
  v2←v1←(1↑⍴m)⍴1
@@ -971,62 +972,62 @@
  EN2:x←⍋,m
 ∇
 
-∇Srl                                                          
+∇Srl
  ⎕RL←1+2147483640|100⊥1↓⎕TS
  ⍝ sets the random number generator to start at a random place
 ∇
 
-∇z←y Subscn x                                                                  
+∇z←y Subscn x
  z←x⌊0⌈(+⍀x)-y
  ⍝ subtract scan used to subtract scalar y from vector x until you run out of y
  ⍝ will not subtract from an element of x past 0
 ∇
 
-∇z←Time                                                                              
+∇z←Time
  z←(,Tmfmt 100⊥((12|z[1])+(12×0=12|z[1])),z[2]),(2 3⍴' AM PM')[1+(z←⎕TS[4 5])[1]≥12;]
 ∇
 
-∇z←Tmfmt d                                         
+∇z←Tmfmt d
  z←(2 0⍕⍉d[,1;]),':',2 0⍕⍉(d←(2⍴100)⊤,d)[,2;]
  z←z[;1],(0 ¯1+⍴z)⍴¯1 0↓(d=' ')⊖(d←,0 1↓z),[0.5]'0'
 ∇
 
-∇z←a To b;c;⎕IO                                                              
+∇z←a To b;c;⎕IO
  z←(¯1↓a),(c,c+z[2]×(×z[1]-c)×⍳⌊|(z[1]-c←¯1↑a)÷(z←2↑b,1)[2]),(1+⎕IO←1)↓b
  ⍝ this function is able to be part of a vector to include a run of numbers
  ⍝ z = (¯1↓a),( (¯1↑a) to and including b[1] in increments of b[2] or 1), 2↓b
 ∇
 
-∇z←Today                
+∇z←Today
  z←10000 100 100⊥⎕TS[⍳3]
 ∇
 
-∇z←p Trunc n              
+∇z←p Trunc n
  z←(10*-p)×(×n)×⌊|n←n×10*p
 ∇
 
-∇z←ul UL m                      
+∇z←ul UL m
  z←(' ',ul)[1+(∨\z)∧⌽∨\⌽z←m≠' ']
 ∇
 
-∇z←c UL2 x  
+∇z←c UL2 x
  z←(x≠' ')\c
 ∇
 
-∇z←c UL3 v                                
+∇z←c UL3 v
  z←((,v∘.≥⍳z)/,((⍴v),z)⍴(z⍴1),(x←⌈/v)⍴0)\c
 ∇
 
-∇z←Unbox x       
+∇z←Unbox x
  (x z)←⊃x ⋄ z←x⍴z
 ∇
 
-∇x←Unique r                                       
+∇x←Unique r
  x←((r⍳r)=⍳⍴r)/r
  ⍝ returns a single occurance of all elements in r
 ∇
 
-∇r←VI n                                                                          
+∇r←VI n
  ⍝ Valid Input
  ⍝ n = string vector
  ⍝ r = binary vector where
@@ -1037,7 +1038,7 @@
  r←(1≥+/n='.')∧(∧/'-'≠0 1↓n)∧(1≠-⌿+/∧\' .'∘.≠n)∧(∧/n∈r,'.-¯ ')∧∨/n∊r←'0123456789'
 ∇
 
-∇r←v Vck n                                                                   
+∇r←v Vck n
  →(r←2=⍴v)/ER1
  →(0=1↑0⍴n)/EN1
  →(r←(¯1↑(' '≠n)/n←,n)∊' ,')/ER2
@@ -1053,7 +1054,7 @@
  ER3:ER 'Error: you must enter ',(⍕v[1]),' to ',(⍕v[2]),' numbers; re-enter.'
 ∇
 
-∇WPrintWS2 ⍙x⍙;f;v;t;∆P;∆G;∆B;∆CV;⎕IO;⎕PW;Delim;Cms;Pad;w                
+∇WPrintWS2 ⍙x⍙;f;v;t;∆P;∆G;∆B;∆CV;⎕IO;⎕PW;Delim;Cms;Pad;w
  ⍝ ⍙x⍙ = 0 = print all functions
  ⍝       1 = compress out functions with names that contain ∆ in them
  ⍝       2 = compress out functions that begin with a capitol letter
@@ -1093,7 +1094,7 @@
  'WS List complete.'
 ∇
 
-∇z←WSU∆AddLineNumbers t;i;n;q                                                           
+∇z←WSU∆AddLineNumbers t;i;n;q
  ⍝ return matrix of function with line numbers added
  →(0=1↑⍴z←t←⎕CR t)/0
  q←'abcdefghijklmnopqrstuvwxyz∆ABCDEFGHIJKLMNOPQRSTUVWXYZ⍙0123456789'
@@ -1136,7 +1137,7 @@
  ⍝ note: all of the functions must be in the workspace
 ∇
 
-∇WSU∆PrintFunction f;m;Pd;∆FH                                    
+∇WSU∆PrintFunction f;m;Pd;∆FH
  →(0=1↑⍴m←WSU∆AddLineNumbers f)/ER1
  Pd←,'P'
  OpenPrinter '-o landscape'
@@ -1148,7 +1149,7 @@
  ER1:'*** Function ',f,' does not exist ***'
 ∇
 
-∇WSU∆PrintWS ⍙x⍙;⎕PW;v;f;L;t;r;i;n;wa;⎕IO;q;⍙y⍙;lpp;plpp;Pd;∆FH;pr       
+∇WSU∆PrintWS ⍙x⍙;⎕PW;v;f;L;t;r;i;n;wa;⎕IO;q;⍙y⍙;lpp;plpp;Pd;∆FH;pr
  ⍝ ⍙y⍙ = 'WSID'
  ⍝ ⍙x⍙ = 0 = print all functions
  ⍝       1 = compress out functions with names that contain ∆ in them
@@ -1260,7 +1261,7 @@
  r←⎕FX t ⍝ restore original
 ∇
 
-∇f WSU∆ReplaceWS t;x;c;m                                                                                      
+∇f WSU∆ReplaceWS t;x;c;m
  ⍝ replace all occurances of string f to string t in the entire workspace
  x←⎕NL 3 4
  LP:→(0=⍴x)/0
@@ -1294,7 +1295,7 @@
  →LP1
 ∇
 
-∇WSU∆SearchWS b;a;c;d;g;x                    
+∇WSU∆SearchWS b;a;c;d;g;x
  ⍝ search an entire workspace for string in b
  g←0
  a←⎕NL 3 4
@@ -1315,17 +1316,17 @@
  z←l
 ∇
 
-∇r←∆DT a                                                   
+∇r←∆DT a
  ⍝ convert YYYYMMDD into MMDDYYYY
  r←⍎'100 100 10000⊥(10000 100 100⊤a)[2 3 1',((⍴⍴a)⍴';'),']'
 ∇
 
-∇r←∆DT2 a                                                  
+∇r←∆DT2 a
  ⍝ convert MMDDYYYY into YYYYMMDD
  r←⍎'10000 100 100⊥(100 100 10000⊤a)[3 1 2',((⍴⍴a)⍴';'),']'
 ∇
 
-∇t ∆LLP d;∆LN;∆PN;∆G;∆P;∆C;q;Pd                                   
+∇t ∆LLP d;∆LN;∆PN;∆G;∆P;∆C;q;Pd
  →(0=⍴d)/ER1
  t←','Parse t
  ∆C←⍎t[2;]
@@ -1345,7 +1346,7 @@
  ER1:ER'There is no available data.'
 ∇
 
-∇t ∆LP d;i;j;g;a;z;L;x;f;n;c                                                     
+∇t ∆LP d;i;j;g;a;z;L;x;f;n;c
  n←0
  i←-g←21-1↑⍴t←RS t
  c←⌈/(1↓⍴t),1↓⍴d
@@ -1390,7 +1391,7 @@
  ER1:→EN1 ∆ ER(1↓a),' does not exist.'
 ∇
 
-∇z←∆LPH;m                                                      
+∇z←∆LPH;m
  m←'R20,L59'
  ''
  m Ctit'F, = advance to the first screen and display it'
@@ -1414,11 +1415,11 @@
  ''
 ∇
 
-∇z←L ∆RD r   
+∇z←L ∆RD r
  z←L,⎕AV[1],r
 ∇
 
-∇x←e ∆SS s;rs;old;new;so;v;i;r                  
+∇x←e ∆SS s;rs;old;new;so;v;i;r
  →((' '=1↑0⍴e)∧' '=1↑0↑s←,s)/EN0
  →⍴0⍴⎕←'Invalid data type'
  EN0:rs←(⍴⍴e),⍴e
