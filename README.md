@@ -3,7 +3,7 @@ Documentation on the Utils APL workspace
 
 by Blake McBride
 
-https://github.com/blakemcbride/APLUtils
+
 
 
 I programmed business applications (as opposed to scientific or
@@ -52,6 +52,10 @@ rationale for the use of APL in business applications - even today!
 
 The following documents are provided:
 
-DevUtils.txt	Development utilities documentation
-AppUtils.txt	Application runtime utilities
+DevUtils.txt	 Development utilities documentation
+
+AppUtils.txt	 Application runtime utilities 
+
+Source code at: [https://github.com/blakemcbride/APLUtils](https://github.com/blakemcbride/APLUtils)
+
 
